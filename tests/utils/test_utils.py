@@ -73,3 +73,17 @@ def test_lamport_to_sol_large_input():
     expected = get_rounded_expectation(arg)
     assert utils.lamport_to_sol(arg) == expected
     assert isinstance(expected, float)
+
+
+@pytest.mark.parametrize('arg, expected, precision', [
+    (1, 1.0, 1),
+    (1.0, 1.0, 1),
+    (1.1111111111111111, 1.111111111, utils.SOL_FLOATING_PRECISION),
+    (1.11, 1.11, -1),
+    (1.2345, 1.2, 1),
+    (1.0, 1.0, 0)
+
+])
+def test_truncate_float(arg, expected, precision):
+    assert utils.truncate_float(arg, precision) == expected
+

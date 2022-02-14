@@ -10,6 +10,9 @@ SOL_FLOATING_PRECISION: int = 9
 
 
 def truncate_float(number: int, length: int) -> float:
+    if length < 1:
+        return number
+
     number = number * pow(10, length)
     number = int(number)
     number = float(number)
